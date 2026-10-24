@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KAUSHALYA - Skill Se Kamai</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--dark:#142F3D;--orange:#FF9F3F;--green:#A8D5A2;--cream:#FFF9EF}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--dark)}
+.page{display:none;min-height:100vh}.page.active{display:block}
+.btn{padding:14px 26px;border-radius:12px;border:none;font-weight:700;cursor:pointer}
+.btn-dark{background:var(--dark);color:white}.btn-orange{background:var(--orange);color:var(--dark)}
+.header{display:flex;justify-content:space-between;padding:14px 4%;position:sticky;top:0;background:var(--cream);z-index:10}
+.lang-btn{padding:6px 12px;border-radius:18px;border:1px solid #ddd;background:white;cursor:pointer;font-size:11px}
+.lang-btn.active{background:var(--dark);color:white}
+.who-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:20px 4%;max-width:1000px;margin:auto}
+.who-card{border-radius:20px;padding:20px}.who-card.worker{background:#FFD6A8}.who-card.customer{background:#A8D5A2}
+.form-box{max-width:600px;margin:20px auto;background:white;padding:24px;border-radius:20px}
+.form-box input,select{width:100%;padding:12px;border:1px solid #ddd;border-radius:10px;margin:6px 0}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.workers{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;padding:20px 4%}
+.modal{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.5);display:none;align-items:flex-end;justify-content:center;z-index:100}
+.modal.show{display:flex}.modal-content{background:white;width:100%;max-width:500px;border-radius:22px 22px 0 0;padding:20px;max-height:92vh;overflow:auto}
+.detail-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px dashed #eee;font-size:13px}
+.scanner-box{background:#F8FFF8;border:2px dashed #6DBE6B;border-radius:16px;padding:16px;text-align:center;margin:14px 0}
+.qr{width:160px;height:160px;background:white;border:1px solid #ddd;border-radius:12px;margin:10px auto;display:flex;align-items:center;justify-content:center;flex-direction:column}
+@media(max-width:700px){.who-grid{grid-template-columns:1fr}.form-row{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="header">
+<div style="font-weight:800">🌱 KAUSHALYA</div>
+<div>
+<button class="lang-btn" onclick="setLang('mr')" id="lb-mr">मराठी</button>
+<button class="lang-btn" onclick="setLang('hi')" id="lb-hi">हिन्दी</button>
+<button class="lang-btn active" onclick="setLang('en')" id="lb-en">English</button>
+</div>
+</div>
+
+<div class="page active" id="p-home">
+<div style="text-align:center;padding:60px 5%;max-width:800px;margin:auto">
+<h1 style="font-family:Poppins;font-size:38px">KAUSHALYA<br><span style="color:#FF9F3F" id="t-sub">Degree nahi skill hai toh Kaushalya hai</span></h1>
+<p style="color:#1C4D3A;font-weight:600;margin:15px 0" id="t-tag">Local skills • Local livelihoods • Dignity for all</p>
+<button class="btn btn-dark" style="margin-top:20px" onclick="goPage('who')" id="t-next">Next →</button>
+</div>
+</div>
+
+<div class="page" id="p-who">
+<h2 style="text-align:center;padding:20px" id="t-who">Aap kaun hai? / Who are you?</h2>
+<div class="who-grid">
+<div class="who-card worker"><h3>I am a Worker</h3><p style="font-size:11px">For Women, Rural Youth, Disabled</p><ul style="font-size:12px;line-height:2;list-style:none"><li>💰 Earn Rs 300-500 per day</li><li>▶️ Upload 30-sec video</li><li>🪪 Kaushalya Card</li></ul><button class="btn btn-orange" style="width:100%;margin-top:12px" onclick="goPage('wcat')">Worker Join</button></div>
+<div class="who-card customer"><h3>I am a Customer</h3><p style="font-size:11px">Need mehendi, Aya, Tally, Tuition, Cleaning</p><ul style="font-size:12px;line-height:2;list-style:none"><li>📍 Find verified workers in 2km</li><li>▶️ Watch 30-sec video</li><li>📅 Book now</li></ul><button class="btn" style="width:100%;margin-top:12px;background:#5EAD5C" onclick="goPage('cskill')">Customer Search</button></div>
+</div>
+</div>
+
+<div class="page" id="p-wcat">
+<h2 style="text-align:center;padding:20px">Degree nahi skill hai toh Kaushalya hai</h2>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;padding:20px;max-width:800px;margin:auto">
+<div class="who-card worker" style="cursor:pointer;text-align:center" onclick="goPage('wlogin')">👩 Women<br><small>Mehendi, Tailoring</small></div>
+<div class="who-card worker" style="cursor:pointer;text-align:center" onclick="goPage('wlogin')">🧑‍🌾 Rural Youth<br><small>Tally, Electrician</small></div>
+<div class="who-card worker" style="cursor:pointer;text-align:center" onclick="goPage('wlogin')">♿ Disabled<br><small>Work From Home</small></div>
+</div>
+<div style="text-align:center"><button class="btn btn-dark" onclick="goPage('wlogin')">Login →</button></div>
+</div>
+
+<div class="page" id="p-wlogin">
+<div class="form-box"><h2>Login</h2><input id="loginMob" placeholder="+91 98765 43210"><button class="btn btn-dark" style="width:100%;margin-top:15px" onclick="goPage('wform')">Send OTP →</button></div>
+</div>
+
+<div class="page" id="p-wform">
+<div class="form-box">
+<h2>Worker Registration Form</h2>
+<label>Name *</label><input id="fName" placeholder="Sunita Pawar">
+<div class="form-row"><div><label>Age *</label><input type="number" placeholder="28"></div><div><label>Gender</label><select><option>Female</option><option>Male</option></select></div></div>
+<label>Skill *</label><select id="fSkill"><option>Mehendi Artist</option><option>Cook</option><option>Cleaning</option><option>Pedicure / Beauty</option><option>Tally Operator</option><option>Caregiver</option></select>
+<label>Address *</label><input placeholder="Kopargaon">
+<div class="form-row"><div><label>Rent / Price *</label><input id="fRent" placeholder="₹300 per day"></div><div><label>Availability *</label><select id="fAvail"><option>Available Today</option><option>Available Tomorrow</option><option>Work From Home - Anytime</option></select></div></div>
+<label>Video (30-sec) *</label><div style="border:2px dashed #ccc;padding:15px;text-align:center;border-radius:10px">📹 Upload video</div>
+<div class="form-row"><div><label>Mobile No *</label><input id="fMob" placeholder="9876543210"></div><div><label>WhatsApp No *</label><input id="fWamob" placeholder="WhatsApp No"></div></div>
+<label>Bank Name *</label><input id="fBank" placeholder="SBI">
+<label>Account No *</label><input id="fAcc" placeholder="123456789012">
+<label>UPI Scanner *</label><div style="border:2px dashed #6DBE6B;padding:15px;text-align:center;border-radius:10px;background:#F8FFF8">📷 Upload your UPI QR Scanner (This will show to customer)</div>
+<button class="btn btn-dark" style="width:100%;margin-top:15px" onclick="submitWorker()">Done → Submit</button>
+</div>
+</div>
+
+<div class="page" id="p-otp">
+<div class="form-box" style="text-align:center"><h2>Verify OTP</h2><p style="font-size:12px;opacity:0.6">OTP sent to registered mobile</p><p id="otpDisplay" style="font-weight:700;margin:12px 0">+91 98765 43210</p><div style="display:flex;gap:8px;justify-content:center;margin:20px 0"><input style="width:42px;height:48px;text-align:center;border:2px solid #ddd;border-radius:10px"><input style="width:42px;height:48px;text-align:center;border:2px solid #ddd;border-radius:10px"><input style="width:42px;height:48px;text-align:center;border:2px solid #ddd;border-radius:10px"><input style="width:42px;height:48px;text-align:center;border:2px solid #ddd;border-radius:10px"><input style="width:42px;height:48px;text-align:center;border:2px solid #ddd;border-radius:10px"><input style="width:42px;height:48px;text-align:center;border:2px solid #ddd;border-radius:10px"></div><button class="btn btn-dark" style="width:100%" onclick="goPage('success')">Verify & Register</button></div>
+</div>
+
+<div class="page" id="p-success">
+<div style="text-align:center;padding:60px 5%"><div style="width:80px;height:80px;background:#D1F0D0;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:40px;margin:0 auto 20px">✅</div><h2>Successfully Registered!</h2><p id="sucName" style="margin:10px 0">Sunita Pawar - Mehendi Artist</p><p id="sucInfo" style="font-size:12px;opacity:0.6">Kopargaon • ₹300 • Available Today • Verified</p><button class="btn btn-dark" onclick="goPage('home')">Go to Home</button></div>
+</div>
+
+<div class="page" id="p-cskill">
+<h2 style="text-align:center;padding:20px">What service do you need?</h2>
+<div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;padding:10px"><button class="lang-btn active" onclick="filterC('all',this)">All</button><button class="lang-btn" onclick="filterC('Mehendi',this)">Mehendi</button><button class="lang-btn" onclick="filterC('Cook',this)">Cook</button><button class="lang-btn" onclick="filterC('Cleaning',this)">Cleaning</button><button class="lang-btn" onclick="filterC('Beauty',this)">Pedicure</button></div>
+<div class="workers" id="cgrid"></div>
+</div>
+
+<div class="modal" id="workerModal" onclick="if(event.target==this)closeModal()">
+<div class="modal-content">
+<div style="display:flex;justify-content:space-between"><h3 id="mName">Worker</h3><span onclick="closeModal()" style="cursor:pointer;font-size:22px">×</span></div>
+<img id="mImg" src="" style="width:100%;height:180px;object-fit:cover;border-radius:12px;margin:10px 0;background:#eee">
+<div id="mDetails"></div>
+<div class="scanner-box"><h4>💳 Payment Process</h4><p style="font-size:11px;opacity:0.7">If OK, pay via scanner below</p><div class="qr"><div style="font-size:40px">⬛</div><div style="font-weight:700" id="qrName">Sunita</div><div style="font-size:10px">UPI: worker@upi</div><div style="font-size:9px;background:#142F3D;color:white;padding:4px 8px;border-radius:6px;margin-top:6px">Scan to Pay ₹300</div></div><p style="font-size:10px;opacity:0.6">Scanner attached by worker • Verified ✅</p></div>
+<div style="display:flex;gap:8px;margin-top:12px"><button class="btn" style="flex:1;background:#25D366;color:white" onclick="bookWA()">💬 WhatsApp</button><button class="btn btn-dark" style="flex:1" onclick="payNow()">💰 Pay & Book</button></div>
+<div style="display:flex;gap:8px;margin-top:8px"><button class="btn" style="flex:1;border:1px solid #ddd;background:white;font-size:12px" onclick="callNow()">📞 Call Mobile</button><button class="btn" style="flex:1;border:1px solid #ddd;background:white;font-size:12px" onclick="bookWA()">📱 WhatsApp No</button></div>
+</div>
+</div>
+
+<div class="modal" id="payModal"><div class="modal-content" style="text-align:center"><div style="width:80px;height:80px;background:#D1F0D0;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:40px;margin:0 auto 16px">💸</div><h3>Payment Successful!</h3><p style="font-size:12px;opacity:0.7">₹300 paid to <span id="payToName">Worker</span><br>Booking confirmed!</p><button class="btn btn-dark" style="width:100%;margin-top:12px" onclick="closePay();closeModal();goPage('home')">Done → Go Home</button></div></div>
+
+<script>
+function goPage(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('p-'+id).classList.add('active');window.scrollTo(0,0);if(id=='cskill')renderC()}
+function setLang(l){localStorage.setItem('lang',l);document.querySelectorAll('.lang-btn').forEach(b=>b.classList.remove('active'));document.getElementById('lb-'+l).classList.add('active');const d={en:{sub:"Degree nahi skill hai toh Kaushalya hai",tag:"Local skills • Local livelihoods • Dignity for all",next:"Next →",who:"Aap kaun hai? / Who are you?"},hi:{sub:"डिग्री नहीं हुनर है तो कौशल्या है",tag:"लोकल हुनर • लोकल रोजगार",next:"आगे →",who:"आप कौन हैं?"},mr:{sub:"डिग्री नाही कौशल्य आहे तर कौशल्या आहे",tag:"स्थानिक कौशल्य • स्थानिक रोजगार",next:"पुढे →",who:"तुम्ही कोण आहात?"}};const t=d[l];document.getElementById('t-sub').innerText=t.sub;document.getElementById('t-tag').innerText=t.tag;document.getElementById('t-next').innerText=t.next;document.getElementById('t-who').innerText=t.who;}
+function submitWorker(){const n=document.getElementById('fName').value||'Sunita Pawar';const s=document.getElementById('fSkill').value;const r=document.getElementById('fRent').value||'₹300';const a=document.getElementById('fAvail').value;const m=document.getElementById('fMob').value||'98765';document.getElementById('otpDisplay').innerText='+91 '+m;document.getElementById('sucName').innerText=n+' - '+s;document.getElementById('sucInfo').innerText='Kopargaon • '+r+' • '+a;goPage('otp');}
+const custWorkers=[{name:"Sunita Pawar",skill:"Mehendi Artist",cat:"Mehendi",rent:"₹300 per hand",avail:"Available Today",mob:"98765 43210",wano:"98765 43210",bank:"SBI • Verified",dist:"1.2 km • Kopargaon",img:"https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=400"},{name:"Sangeeta Mali",skill:"Cook",cat:"Cook",rent:"₹400 per day",avail:"Available Tomorrow",mob:"87654 32109",wano:"87654 32109",bank:"Bank of Maharashtra",dist:"1.5 km",img:"https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=400"},{name:"Laxmi Kale",skill:"Cleaning",cat:"Cleaning",rent:"₹200 per day",avail:"Available Today",mob:"76543 21098",wano:"76543 21098",bank:"SBI",dist:"0.8 km",img:"https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=400"},{name:"Priya Rathod",skill:"Beauty / Pedicure Expert",cat:"Beauty",rent:"₹250 per session",avail:"Work From Home",mob:"98765 12345",wano:"98765 12345",bank:"HDFC",dist:"2.0 km",img:"https://images.unsplash.com/photo-1562322140-8baeececf3df?w=400"}];
+function renderC(f='all'){const g=document.getElementById('cgrid');g.innerHTML='';const list=f==='all'?custWorkers:custWorkers.filter(w=>w.cat===f);list.forEach(w=>{g.innerHTML+=`<div class="workers" style="display:block"><div class="w-card" onclick="openWorker('${w.name}')"><div style="display:flex;gap:10px"><img src="${w.img}" style="width:48px;height:48px;border-radius:50%"><div><b>${w.name} ✅</b><br><small style="color:#1C4D3A">${w.skill}</small><br><small style="opacity:0.6">${w.dist} • ${w.avail}</small></div></div><div style="display:flex;justify-content:space-between;margin-top:10px"><b>${w.rent}</b><button class="btn btn-dark" style="padding:6px 12px;font-size:11px">View Details</button></div></div></div>`})}
+function filterC(cat,el){document.querySelectorAll('#p-cskill .lang-btn').forEach(b=>b.classList.remove('active'));el.classList.add('active');renderC(cat);}
+let currentWorker=null;
+function openWorker(name){const w=custWorkers.find(x=>x.name===name);currentWorker=w;document.getElementById('mName').innerText=w.name+' - '+w.skill;document.getElementById('mImg').src=w.img;document.getElementById('qrName').innerText=w.name;document.getElementById('mDetails').innerHTML=`<div class="detail-row"><span>👤 Name:</span><b>${w.name}</b></div><div class="detail-row"><span>🛠️ Skill:</span><b>${w.skill}</b></div><div class="detail-row"><span>💰 Rent / Price:</span><b>${w.rent}</b></div><div class="detail-row"><span>⏰ Availability:</span><b style="color:#1C8A3A">${w.avail}</b></div><div class="detail-row"><span>📱 Mobile No:</span><b>${w.mob}</b></div><div class="detail-row"><span>💬 WhatsApp No:</span><b style="color:#25D366">${w.wano}</b></div><div class="detail-row"><span>📍 Address:</span><b>${w.dist}</b></div><div class="detail-row"><span>🏦 Bank:</span><b>${w.bank}</b></div>`;document.getElementById('workerModal').classList.add('show');}
+function closeModal(){document.getElementById('workerModal').classList.remove('show');}
+function bookWA(){if(!currentWorker)return;const msg=`Hi! Booking for ${currentWorker.name} - ${currentWorker.skill} - ${currentWorker.rent}`;window.open(`https://wa.me/91${currentWorker.wano.replace(/ /g,'')}?text=${encodeURIComponent(msg)}`,'_blank');}
+function callNow(){alert(`Calling ${currentWorker.mob}`);}
+function payNow(){document.getElementById('payToName').innerText=currentWorker.name;document.getElementById('payModal').classList.add('show');}
+function closePay(){document.getElementById('payModal').classList.remove('show');}
+setLang('en');renderC();
+</script>
+</body>
+</html>
